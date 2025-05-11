@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой профессиональный блог</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+        <!-- навигация без логина -->
+<nav class="navbar">
+    <div class="container">
+        <a href="/" class="logo">MyBlog</a>
+        <div class="nav-links">
+            <a href="/about">Обо мне</a>
+            <a href="/posts">Статьи</a>
+            <a href="/contact">Контакты</a>
+        </div>
+    </div>
+</nav>
+
+    <!-- Герой-секция -->
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">Добро пожаловать в мой блог</h1>
+            <p class="hero-subtitle">Исследуйте мир технологий через призму моего опыта</p>
+            <a href="#featured-posts" class="btn btn-primary btn-lg">Читать статьи</a>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="container">
+      <!-- Последние публикации -->
+      <section id="posts" class="featured-posts">
+        <h2 class="section-title">Последние статьи</h2>
+        <div class="posts-grid">
+            {% for post in posts %}
+            <article class="post-card">
+                {% if post.image %}
+                <div class="post-image-wrapper">
+                    <img src="/static/{{ post.image }}" alt="{{ post.title }}" class="post-logo">   
+                </div>
+                {% endif %}
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.content[:150] }}...</p>
+                <a href="/posts/{{ post.id }}" class="read-more">Читать дальше</a>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+
+        <!-- О авторе -->
+        <section class="about-section">
+            <div class="about-content">
+                <h2 class="section-title">Об авторе</h2>
+                <p>Привет! Я профессиональный разработчик с более чем 5-летним опытом работы с современными веб-технологиями.</p>
+                <a href="/about" class="btn btn-outline">Узнать больше</a>
+            </div>
+            <div class="about-image">
+                <img src="/static/images/author.jpg" alt="Автор блога" class="rounded-img">
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MyBlog</h3>
+                    <p>Профессиональный блог о технологиях и разработке</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/posts">Все статьи</a></li>
+                        <li><a href="/about">Обо мне</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MyBlog. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

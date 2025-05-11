@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статьи - Мой блог</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 30px 0;
+        }
+
+        .pagination a,
+        .pagination span {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .pagination .current {
+            background-color: #333;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">MyBlog</a>
+            <div class="nav-links">
+                <a href="/about">Обо мне</a>
+                <a href="/posts">Статьи</a>
+                <a href="/contact">Контакты</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="posts" class="featured-posts">
+            <h2 class="section-title">Все статьи</h2>
+            <div class="posts-grid">
+                {% if posts.items %}
+                    {% for post in posts.items %}
+                    <article class="post-card">
+                        {% if post.image %}
+                        <img src="/static/{{ post.image }}" alt="{{ post.title }}" class="post-logo">
+                        {% endif %}
+                        <div class="post-content">
+                            <h3>{{ post.title }}</h3>
+                            <p>{{ post.content[:150] }}...</p>
+                            <a href="/posts/{{ post.id }}" class="read-more">Читать дальше</a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                {% else %}
+                    <p>Нет статей для отображения</p>
+                {% endif %}
+            </div>
+
+            <!-- Пагинация -->
+            <div class="pagination">
+                {% if posts.page > 1 %}
+                <a href="/posts?page={{ posts.page - 1 }}">&laquo; Назад</a>
+                {% endif %}
+
+                {% for num in range(1, posts.pages + 1) %}
+                {% if num == posts.page %}
+                <span class="current">{{ num }}</span>
+                {% else %}
+                <a href="/posts?page={{ num }}">{{ num }}</a>
+                {% endif %}
+                {% endfor %}
+
+                {% if posts.page < posts.pages %}
+                <a href="/posts?page={{ posts.page + 1 }}">Вперёд &raquo;</a>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 MyBlog. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

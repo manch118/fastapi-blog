@@ -1,0 +1,368 @@
+/* === Переменные цвета и шрифты === */
+:root {
+    --primary-color: #6a00f4;
+    --secondary-color: #ff6f91;
+    --accent-color: #00c9a7;
+    --warning-color: #ffb400;
+    --success-color: #4cc9f0;
+    --dark-color: #1b263b;
+    --light-color: #f1f5f9;
+    --gray-color: #6c757d;
+    --font-main: 'Segoe UI', system-ui, sans-serif;
+  }
+  
+  /* === Базовые сбросы и фон === */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: var(--font-main);
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+  }
+  
+  /* === Навигация === */
+  .navbar {
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+  }
+  
+  .nav-links a {
+    margin-left: 1rem;
+    padding: 6px 12px;
+    font-weight: 500;
+    color: white;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .nav-links a:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* === Кнопки === */
+  .btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .btn-primary {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background: var(--secondary-color);
+  }
+  
+  .btn-outline {
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+  }
+  
+  .btn-outline:hover {
+    background: var(--accent-color);
+    color: white;
+  }
+  
+  .btn-warning {
+    background: var(--warning-color);
+    color: #000;
+  }
+  
+  .btn-warning:hover {
+    opacity: 0.9;
+  }
+  
+  /* === Hero-секция === */
+  .hero {
+    background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 5rem 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-in-out;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+    animation: fadeIn 2s ease;
+  }
+  
+  /* === Заголовки секций === */
+  .section-title {
+    font-size: 2.4rem;
+    margin: 4rem 0 2rem;
+    text-align: center;
+    color: var(--primary-color);
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--secondary-color);
+    margin: 10px auto 0;
+  }
+  
+  /* === Карточки постов === */
+  .posts-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .post-card {
+    width: 180px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+  }
+  
+  .post-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .post-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* квадратная обрезка */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+  }
+  
+  .post-image-wrapper img.post-logo {
+    width: 30%;
+    height: 30%;
+    object-fit: cover;
+  }
+  
+  .post-card h3 {
+    font-size: 1.1rem;
+    margin: 15px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .post-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 15px 10px;
+    text-align: center;
+  }
+  
+  .read-more {
+    display: block;
+    text-align: center;
+    margin: 10px 15px 15px;
+    padding: 8px 12px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+  
+  .read-more:hover {
+    background-color: #0056b3;
+  }
+  
+  /* === Подвал === */
+  .footer {
+    background: var(--dark-color);
+    color: #fff;
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-section h4 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-section ul li a {
+    color: #ccc;
+    transition: color 0.3s;
+  }
+  
+  .footer-section ul li a:hover {
+    color: white;
+  }
+  
+  .social-links a {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: white;
+    transition: color 0.3s;
+  }
+  
+  .social-links a:hover {
+    color: var(--success-color);
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+    font-size: 0.9rem;
+    color: #aaa;
+  }
+  
+  /* === Анимации === */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* === Адаптивность === */
+  @media (max-width: 768px) {
+    .navbar .container {
+      flex-direction: column;
+    }
+  
+    .nav-links {
+      margin-top: 1rem;
+    }
+  
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  
+    .about-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+  .post-logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 30px 0;
+}
+
+.pagination a,
+.pagination span {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination .current {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}

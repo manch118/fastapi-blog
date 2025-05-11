@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Создать пост</title>
+</head>
+<body>
+    <h1>Создание нового поста</h1>
+    <form action="/admin/create" method="post" enctype="multipart/form-data">
+        <label for="title">Заголовок:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+
+        <label for="content">Содержимое:</label><br>
+        <textarea id="content" name="content" rows="6" cols="60" required></textarea><br><br>
+
+        <label for="category">Категория:</label><br>
+        <input type="text" id="category" name="category" required><br><br>
+
+        <label for="image">Изображение:</label><br>
+        <input type="file" id="image" name="image"><br><br>
+
+        <button type="submit">Создать</button>
+    </form>
+
+    <br>
+    <a href="/admin/panel">Назад к панели</a>
+</body>
+</html>

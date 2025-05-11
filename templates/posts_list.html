@@ -1,0 +1,29 @@
+<div class="posts-grid">
+    {% for post in posts %}
+        <div class="post-card">
+            <div class="post-image" style="background-image: url('{{ post.image_url }}');"></div>
+            <div class="post-content">
+                <h3 class="post-title">{{ post.title }}</h3>
+                <div class="post-meta">
+                    <span class="post-category">{{ post.category }}</span>
+                    <span class="post-author">{{ post.author }}</span>
+                    <span class="post-date">{{ post.created_at }}</span>
+                </div>
+                <p class="post-excerpt">{{ post.content[:150] }}...</p>
+                <a href="{{ url_for('view_post', post_id=post.id) }}" class="btn-read">Читать</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if page > 1 %}
+        <button class="page-btn" hx-get="/api/posts/html?page={{ page - 1 }}&category={{ category }}&q={{ q }}&per_page=5" hx-target=".posts-grid">Предыдущая</button>
+    {% endif %}
+    {% for p in range(1, total_pages + 1) %}
+        <button class="page-btn {% if p == page %}active{% endif %}" hx-get="/api/posts/html?page={{ p }}&category={{ category }}&q={{ q }}&per_page=5" hx-target=".posts-grid">{{ p }}</button>
+    {% endfor %}
+    {% if page < total_pages %}
+        <button class="page-btn" hx-get="/api/posts/html?page={{ page + 1 }}&category={{ category }}&q={{ q }}&per_page=5" hx-target=".posts-grid">Следующая</button>
+    {% endif %}
+</div>

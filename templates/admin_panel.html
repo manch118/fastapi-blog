@@ -1,0 +1,26 @@
+<!-- admin_panel.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ панель</title>
+</head>
+<body>
+    <h2>Админ-панель</h2>
+    <a href="/admin/create">Создать статью</a>
+    <hr>
+    {% for post in posts %}
+        <div>
+            <h3>{{ post.title }}</h3>
+            <p><strong>Категория:</strong> {{ post.category }}</p>
+            {% if post.image %}
+                <p><strong>Изображение:</strong><br><img src="/static/{{ post.image }}" alt="Image" style="max-width: 200px;"></p>
+            {% endif %}
+            <a href="/admin/edit/{{ post.id }}">Редактировать</a>
+            <a href="/admin/delete/{{ post.id }}">Удалить</a>
+            <hr>
+        </div>
+    {% endfor %}
+</body>
+</html>

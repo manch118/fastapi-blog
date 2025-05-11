@@ -1,0 +1,7 @@
+{% for post in posts %}
+<article class="post-card">
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.content[:100] }}...</p>
+    <a href="/post/{{ post.id }}" class="btn btn-secondary">Читать больше</a>
+</article>
+{% endfor %}
