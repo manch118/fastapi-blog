@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLife | Наша команда</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6d28d9;
+            --primary-light: #8b5cf6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        /* Шапка */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: var(--primary);
+        }
+
+        .menu {
+            display: flex;
+            gap: 40px;
+        }
+
+        .menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--primary);
+        }
+
+        .menu a:hover:after {
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Секция команды */
+        .team-section {
+            padding: 150px 0 100px;
+            background: white;
+            position: relative;
+        }
+
+        .team-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.03;
+            z-index: -1;
+        }
+
+        .team-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            text-align: center;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .team-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .team-subtitle {
+            color: var(--gray);
+            font-size: 18px;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Сетка команды */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(109, 40, 217, 0.2);
+            animation: scaleUp 0.3s ease forwards;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transition: height 0.3s;
+        }
+
+        .team-card:hover::before {
+            height: 10px;
+        }
+
+        .team-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background-color: #e5e7eb;
+            /* Заменить на реальные изображения */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .team-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .team-role {
+            font-size: 16px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .team-socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover .team-socials {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-socials a {
+            color: var(--primary);
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .team-socials a:hover {
+            color: var(--primary-light);
+        }
+
+        /* Кнопка CTA */
+        .cta-button {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .menu {
+                display: none;
+            }
+
+            .team-title {
+                font-size: 32px;
+            }
+
+            .team-subtitle {
+                font-size: 16px;
+            }
+
+            .team-content {
+                padding: 0 20px;
+            }
+
+            .team-card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header id="header">
+        <nav>
+            <a href="/" class="logo">
+                <i class="fas fa-home logo-icon"></i>
+                <span>SmartLife</span>
+            </a>
+            <div class="menu">
+                <a href="index.html">Главная</a>
+                <a href="/services">Услуги</a>
+                <a href="/about">О нас</a>
+                <a href="/solutions">Решения</a>
+                <a href="/contacts">Контакты</a>
+                <a href="/team">Команда</a>
+            </div>
+            <a href="/callback" class="btn">Заказать звонок</a>
+        </nav>
+    </header>
+
+    <!-- Секция команды -->
+    <section class="team-section" id="team">
+        <div class="team-bg"></div>
+        <div class="team-content">
+            <h1 class="team-title">Наша команда</h1>
+            <p class="team-subtitle">Познакомьтесь с профессионалами, которые создают умные дома вашей мечты с passion и экспертизой.</p>
+
+            <!-- Сетка команды -->
+            <div class="team-grid">
+                <!-- Член команды 1 -->
+                <div class="team-card" style="animation-delay: 0.1s;">
+                    <div class="team-image"></div>
+                    <h2 class="team-name">Алексей Иванов</h2>
+                    <p class="team-role">Главный инженер</p>
+                    <p class="team-bio">Эксперт по автоматизации с 10+ годами опыта, создает системы, которые работают как часы.</p>
+                    <div class="team-socials">
+                        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://t.me" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <!-- Член команды 2 -->
+                <div class="team-card" style="animation-delay: 0.2s;">
+                    <div class="team-image"></div>
+                    <h2 class="team-name">Мария Смирнова</h2>
+                    <p class="team-role">Дизайнер интерфейсов</p>
+                    <p class="team-bio">Создает интуитивные и стильные интерфейсы для управления умным домом.</p>
+                    <div class="team-socials">
+                        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://t.me" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <!-- Член команды 3 -->
+                <div class="team-card" style="animation-delay: 0.3s;">
+                    <div class="team-image"></div>
+                    <h2 class="team-name">Дмитрий Петров</h2>
+                    <p class="team-role">Менеджер проектов</p>
+                    <p class="team-bio">Обеспечивает, чтобы каждый проект был завершен в срок и превзошел ожидания.</p>
+                    <div class="team-socials">
+                        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://t.me" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+                <!-- Член команды 4 -->
+                <div class="team-card" style="animation-delay: 0.4s;">
+                    <div class="team-image"></div>
+                    <h2 class="team-name">Екатерина Соколова</h2>
+                    <p class="team-role">Специалист по IoT</p>
+                    <p class="team-bio">Интегрирует устройства в единую экосистему для максимального удобства.</p>
+                    <div class="team-socials">
+                        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://t.me" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка CTA -->
+            <a href="/callback" class="btn cta-button">Связаться с нами</a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Фиксация шапки при скролле
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Плавный скролл для якорей
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

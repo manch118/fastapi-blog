@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLife | Услуги</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6d28d9;
+            --primary-light: #8b5cf6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        /* Шапка */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: var(--primary);
+        }
+
+        .menu {
+            display: flex;
+            gap: 40px;
+        }
+
+        .menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--primary);
+        }
+
+        .menu a:hover:after {
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Секция услуг */
+        .services-section {
+            padding: 150px 0 100px;
+            background: white;
+            position: relative;
+        }
+
+        .services-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.03;
+            z-index: -1;
+        }
+
+        .services-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            text-align: center;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .services-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .services-subtitle {
+            color: var(--gray);
+            font-size: 18px;
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            text-align: left;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(109, 40, 217, 0.2);
+            animation: scaleUp 0.3s ease forwards;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transition: height 0.3s;
+        }
+
+        .service-card:hover::before {
+            height: 10px;
+        }
+
+        .service-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .service-description {
+            color: var(--gray);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .service-btn {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .service-btn:hover {
+            color: var(--primary-light);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .menu {
+                display: none;
+            }
+
+            .services-title {
+                font-size: 32px;
+            }
+
+            .services-subtitle {
+                font-size: 16px;
+            }
+
+            .services-content {
+                padding: 0 20px;
+            }
+
+            .service-card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header id="header">
+        <nav>
+            <a href="/" class="logo">
+                <i class="fas fa-home logo-icon"></i>
+                <span>SmartLife</span>
+            </a>
+            <div class="menu">
+                <a href="/">Главная</a>
+                <a href="services">Услуги</a>
+                <a href="about">О нас</a>
+                <a href="contact">Контакты</a>
+            </div>
+            <a href="/callback" class="btn">Заказать звонок</a>
+        </nav>
+    </header>
+
+    <!-- Секция услуг -->
+    <section class="services-section" id="services">
+        <div class="services-bg"></div>
+        <div class="services-content">
+            <h1 class="services-title">Наши услуги</h1>
+            <p class="services-subtitle">Мы предлагаем комплексные решения для вашего умного дома, от проектирования до установки и поддержки.</p>
+            
+            <div class="services-grid">
+                <!-- Услуга 1 -->
+                <div class="service-card">
+                    <i class="fas fa-lightbulb service-icon"></i>
+                    <h2 class="service-title">Умное освещение</h2>
+                    <p class="service-description">Создайте идеальную атмосферу с помощью автоматизированного управления освещением. Экономьте энергию и управляйте светом через приложение.</p>
+                    <a href="/callback" class="service-btn">Узнать больше</a>
+                </div>
+                <!-- Услуга 2 -->
+                <div class="service-card">
+                    <i class="fas fa-shield-alt service-icon"></i>
+                    <h2 class="service-title">Системы безопасности</h2>
+                    <p class="service-description">Обеспечьте защиту вашего дома с камерами, датчиками движения и умными замками, интегрированными в единую систему.</p>
+                    <a href="/callback" class="service-btn">Узнать больше</a>
+                </div>
+                <!-- Услуга 3 -->
+                <div class="service-card">
+                    <i class="fas fa-thermometer-half service-icon"></i>
+                    <h2 class="service-title">Климат-контроль</h2>
+                    <p class="service-description">Настройте комфортную температуру с помощью умных термостатов и систем управления климатом.</p>
+                    <a href="/callback" class="service-btn">Узнать больше</a>
+                </div>
+                <!-- Услуга 4 -->
+                <div class="service-card">
+                    <i class="fas fa-cogs service-icon"></i>
+                    <h2 class="service-title">Полная автоматизация</h2>
+                    <p class="service-description">Интегрируйте все устройства в единую экосистему умного дома для максимального удобства и контроля.</p>
+                    <a href="/callback" class="service-btn">Узнать больше</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Фиксация шапки при скролле
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Плавный скролл для якорей
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartLife | Заказать обратный звонок</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6d28d9;
+            --primary-light: #8b5cf6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Шапка */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: var(--primary);
+        }
+
+        .menu {
+            display: flex;
+            gap: 40px;
+        }
+
+        .menu a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .menu a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .menu a:hover {
+            color: var(--primary);
+        }
+
+        .menu a:hover:after {
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.3);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Форма */
+        .callback-section {
+            padding: 150px 0 100px;
+            background: white;
+            position: relative;
+        }
+
+        .callback-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.03;
+            z-index: -1;
+        }
+
+        .callback-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 40px;
+            text-align: center;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .callback-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .callback-subtitle {
+            color: var(--gray);
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .callback-form {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            animation: fadeIn 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--dark);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Стили для сообщений */
+        .form-message {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .form-message.success {
+            background: #d4f4dd;
+            color: #2e7d32;
+        }
+
+        .form-message.error {
+            background: #f4d4d4;
+            color: #d32f2f;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+
+            .menu {
+                display: none;
+            }
+
+            .callback-title {
+                font-size: 32px;
+            }
+
+            .callback-subtitle {
+                font-size: 16px;
+            }
+
+            .callback-form {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .callback-content {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header id="header">
+        <nav>
+            <a href="/" class="logo">
+                <i class="fas fa-home logo-icon"></i>
+                <span>SmartLife</span>
+            </a>
+            <div class="menu">
+                <a href="/">Главная</a>
+                <a href="services">Услуги</a>
+                <a href="about">О нас</a>
+                <a href="contact">Контакты</a>
+            </div>
+            <a href="/callback" class="btn">Заказать звонок</a>
+        </nav>
+    </header>
+
+    <!-- Форма обратного звонка -->
+    <section class="callback-section">
+        <div class="callback-bg"></div>
+        <div class="callback-content">
+            <h1 class="callback-title">Заказать обратный звонок</h1>
+            <p class="callback-subtitle">Оставьте заявку, и наши специалисты свяжутся с вами в ближайшее время для обсуждения вашего проекта умного дома.</p>
+            
+            <!-- Отображение сообщений -->
+            {% if status %}
+            <div class="form-message {{ status }}">
+                {{ message }}
+            </div>
+            {% endif %}
+
+            <form class="callback-form" method="post" action="/callback">
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" placeholder="Введите ваше имя" value="{{ name or '' }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Номер телефона</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" value="{{ phone or '' }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение</label>
+                    <textarea id="message" name="message" placeholder="Опишите ваш проект или задайте вопрос">{{ message or '' }}</textarea>
+                </div>
+                <button type="submit" class="btn">Отправить заявку</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Фиксация шапки при скролле
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Плавный скролл для якорей
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Клиентская валидация номера телефона
+            document.querySelector('.callback-form').addEventListener('submit', function(e) {
+                const phone = document.getElementById('phone').value;
+                const phonePattern = /^\+?\d{1,3}[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{2}[-.\s]?\d{2}$/;
+                if (!phonePattern.test(phone)) {
+                    e.preventDefault();
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = 'form-message error';
+                    messageDiv.textContent = 'Пожалуйста, введите корректный номер телефона.';
+                    document.querySelector('.callback-content').insertBefore(messageDiv, document.querySelector('.callback-form'));
+                    setTimeout(() => messageDiv.remove(), 3000); // Удаление сообщения через 3 секунды
+                }
+            });
+        });
+    </script>
+</body>
+</html>
